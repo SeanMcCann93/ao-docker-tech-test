@@ -9,3 +9,7 @@ variable "locked" {
 variable "Token" {
   description = "This is the JOIN token to the Docker Swarm manager."
 }
+
+variable "IPLink" {
+  description = "This is the IP for the Docker Swarm manager."
+}
