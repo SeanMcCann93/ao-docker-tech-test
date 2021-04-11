@@ -59,7 +59,10 @@ module "ec2_worker" {
   vpc_sg         = [data.aws_security_group.sg.id] # Task ~ get the Security group with Name Tag "multi_port_access"
   pub_ip         = true
   lock           = var.locked
-  user_data      = templatefile("./../../tools/boot_scripts/boot-worker.sh", Token = var.Token, IPLink = var.IPLink, {})
+  user_data      = templatefile("./../../tools/boot_scripts/boot-worker.sh", {
+    Token = "${var.Token}"
+    IPLink = "${var.IPLink}"
+  })
 
   # @@@ TAGS @@@
   name_tag = "AO-Worker"
