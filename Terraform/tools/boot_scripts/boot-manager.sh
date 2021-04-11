@@ -5,11 +5,11 @@ ssh-keygen -f /home/ubuntu/.ssh/AccessKey -N "" -C "ubuntu"
 apt update
 apt-get update -y
 cd /home/ubuntu/
-sudo su ubuntu
+su ubuntu
 git clone https://github.com/SeanSnake93/ao-docker-tech-test
 cd ./ao-docker-tech-test
 git checkout containerize
-sudo apt install awscli -y
+apt install awscli -y
 cd ./install
 sh terra.sh
 sh docker.sh
