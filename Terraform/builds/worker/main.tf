@@ -19,7 +19,7 @@ provider "aws" {
 
 resource "aws_key_pair" "key_pair" {
   key_name   = "AccessKey"
-  public_key = file("~/.ssh/AccessKey.pub")
+  public_key = file("/home/ubuntu/.ssh/AccessKey.pub")
 }
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

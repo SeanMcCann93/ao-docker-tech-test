@@ -58,7 +58,7 @@ module "subnet_public" {
   vpc_id  = module.vpc.id
 
   # @@@ TAGS @@@
-  name_tag    = "AO-Subnet"
+  name_tag    = "AO-Subnet-Pub"
   network_tag = "AO"
 }
 
@@ -70,7 +70,7 @@ module "subnet_private" {
   vpc_id  = module.vpc.id
 
   # @@@ TAGS @@@
-  name_tag    = "AO-Subnet"
+  name_tag    = "AO-Subnet-Sub"
   network_tag = "AO"
 }
 
