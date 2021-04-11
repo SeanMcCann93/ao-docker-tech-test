@@ -59,7 +59,7 @@ module "ec2_worker" {
   vpc_sg         = [data.aws_security_group.sg.id] # Task ~ get the Security group with Name Tag "multi_port_access"
   pub_ip         = true
   lock           = var.locked
-  user_data      = << EOF
+  user_data      = <<-EOF
   #!/bin/bash
   
   apt update
