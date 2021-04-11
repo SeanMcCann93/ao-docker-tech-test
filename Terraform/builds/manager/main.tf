@@ -136,6 +136,6 @@ module "ec2_manager" {
   user_data      = templatefile("./../../tools/boot_scripts/boot-manager.sh", {})
 
   # @@@ TAGS @@@
-  name_tag = "AO-EC2"
+  name_tag = "AO-Manager"
   network_tag = "AO"
 }

@@ -63,6 +63,6 @@ module "ec2_worker" {
   user_data      = templatefile("./../../tools/boot_scripts/boot-worker.sh", {})
 
   # @@@ TAGS @@@
-  name_tag = "AO-Worker-EC2"
+  name_tag = "AO-Worker"
   network_tag = "AO"
 }
