@@ -1,0 +1,7 @@
+Build Docker Compse file with Nginx and Service running.
+Port Forward the Nginx container
+
+Develop an IaC model for the Build needed
+use Scripts to Build + configure and Destroy
+
+Document your input and upload the changes to git
