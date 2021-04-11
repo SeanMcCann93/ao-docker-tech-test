@@ -133,7 +133,28 @@ module "ec2_manager" {
   vpc_sg         = [module.sg.id]
   pub_ip         = true
   lock           = var.locked
-  user_data      = templatefile("./../../tools/boot_scripts/boot-manager.sh", {})
+  user_data      = <<-EOF
+  #!/bin/bash
+  sudo su ubuntu
+  ssh-keygen -f /home/ubuntu/.ssh/ManagerAccessKey -N "" -C "ubuntu"
+  apt update
+  apt-get update -y
+  cd /home/ubuntu/
+  apt install awscli -y
+  git clone https://github.com/SeanSnake93/ao-docker-tech-test
+  cd ./ao-docker-tech-test
+  git checkout containerize
+  cd ./install
+  sh terra.sh
+  sh docker.sh
+  sh docker-compose.sh
+  cd ./..
+  docker swarm init
+  cd Terraform/builds/worker/ && terraform init
+  terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token=$(docker swarm join-token -q worker) -var IPLink=$(hostname -i) -auto-approve
+  cd ./../../..
+  docker stack deploy --compose-file docker-compose.yml AO_Stack
+  EOF
 
   # @@@ TAGS @@@
   name_tag = "AO-Manager"
