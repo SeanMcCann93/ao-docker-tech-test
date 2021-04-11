@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo su ubuntu
-ssh-keygen -f /home/ubuntu/.ssh/AccessKey -N "" -C "ubuntu"
+ssh-keygen -f /home/ubuntu/.ssh/ManagerAccessKey -N "" -C "ubuntu"
 apt update
 apt-get update -y
 cd /home/ubuntu/
@@ -18,5 +18,6 @@ docker swarm init
 JOIN=$(docker swarm join-token -q worker)
 LINK=$(hostname -i)
 cd Terraform/builds/worker/ && terraform init
-terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token="$JOIN" -var IPLink="$LINK" -auto-approve
+terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token="${JOIN}" -var IPLink="${LINK}" -auto-approve
 cd ./../../..
+docker stack deploy --compose-file docker-compose.yml AO_Stack
