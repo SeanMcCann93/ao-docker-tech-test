@@ -15,3 +15,4 @@ terraform destroy -var locked="${locking}" -var aws_location="${temp_location}" 
 echo ""
 cd ./../manager/
 terraform destroy -var locked="${locking}" -var aws_location="${temp_location}" -auto-approve
+# terraform destroy -var locked="false" -var aws_location="eu-west-1" -auto-approve

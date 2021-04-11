@@ -1,7 +1,7 @@
 #!/bin/bash
 
-temp_access= # Test Purose Only ~ Never Upload this
-temp_sec_access= # Test Purose Only ~ Never Upload this
+# temp_access="" # Test Purose Only ~ Never Upload this
+# temp_sec_access="" # Test Purose Only ~ Never Upload this
 temp_location="eu-west-1" # Enter Region
 locking="false" # This if 'true' will lock the system from accidental termination
 
