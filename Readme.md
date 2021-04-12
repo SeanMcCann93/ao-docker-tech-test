@@ -1,7 +1,7 @@
 [windows-store]: https://www.microsoft.com/store/productId/9NBLGGH4MSV6
 [ubuntu-plug]: https://marketplace.visualstudio.com/items?itemName=Docter60.vscode-terminal-for-ubuntu
 [aws-IAM]: https://console.aws.amazon.com/iam/home
-[Overview-img]: https://github.com/SeanSnake93/ao-docker-tech-test/blob/master/docs/overview.png
+[Overview-img]: https://github.com/SeanSnake93/ao-docker-tech-test/blob/containerize/docs/overview.png
 
 # AO Tech Challenge
 
