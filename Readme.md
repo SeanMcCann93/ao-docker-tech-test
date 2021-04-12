@@ -35,6 +35,8 @@ This will enable more deliberate interactions with systems and prove opportuniti
 
 A Private cloud has been implemented in this network and a system could be set up to direct data through this to improve data security and include AWS tables.
 
+Another great couple of upgrades could be to introduce a Jenkins server or AWS Pipeline system that will enable CI/CD functionality and a dedicated secrets engine that can encrypt and assist in managing passwords/keys to all resources within, or yet to be extended within the network.
+
 ## Pre-requisites
 
 * Ubuntu Bash Terminal
