@@ -1,3 +1,8 @@
+[windows-store]: https://www.microsoft.com/store/productId/9NBLGGH4MSV6
+[ubuntu-plug]: https://marketplace.visualstudio.com/items?itemName=Docter60.vscode-terminal-for-ubuntu
+[aws-IAM]: https://console.aws.amazon.com/iam/home
+[Overview-img]: https://github.com/SeanSnake93/ao-docker-tech-test/blob/master/docs/overview.png
+
 # AO Tech Challenge
 
 Welcome to the AO Tech challenge!
@@ -10,47 +15,76 @@ Solutions to each exercise will be evaluated on the following criteria:
 - Legibility
 - Aesthetics
 
+## Overview
+
+![Network Overview][Overview-img]
+
 ## Pre-requisites
 
-The project provided was built with, and tested against [Docker Desktop](https://www.docker.com/products/docker-desktop) _2.3.0.3_.
+* Ubuntu Bash Terminal
+* AWS IAM User
 
-## Submission
+### Install Ubuntu [Windows]
 
-To submit your work, please fork this repository, and push all commits to your fork upon completion. Once you are happy with your work, send us an email with a link to your repository.
+Ubuntu can be installed via the [windows store][windows-store].
 
-## Exercises
+> When first creating your account you will be asked to set up a new User.
+> (NOTE: This is separate from your standard Windows User.)
 
-The below exercises involve augmenting an [.NET Core](https://dotnet.microsoft.com/download/dotnet-core/2.2) _2.2_ HTTP web application.
+> If using Visual Studio Code, a [Ubuntu plugin][ubuntu-plug] can be enabled to use this terminal here. Using `Ctrl + atl + U` should display the terminal once enabled.
 
-To ensure your focus on the intended challenges, please note that the .NET Core base image and code do not need to be modified.
+### IAM Roles
 
-### Part 1
+To run this build, you will require a [IAM User][aws-IAM].
 
-The application an on-premise service that needs to be migrated to the cloud. It currently run on a Windows Server 2012 R2 server on a VMware ESXi platform that is due to be decommissioned. In the test and production environment the application is load balanced by a pair of Citrix Netscaler's.
+> To produce this you will need to have access to the following Policies.
+> * AmazonsEC2FullAccess
 
-The team that owns this app has also recently transitioned to a product aligned team and is expected to take full operational ownership of the infrastructure supporting their application. They would like to avoid having to 'lift and shift' the application to cloud based instances and have asked if you would be able to help them containerise it instead.
+### Instructions
 
-The team have already managed to dockerise the application but would like to get a load balancer provisioned with a view of removing the need for the Netscaler when the application is migrated. They also have a desire the begin breaking up the application and believe this will be an important step on that journey.
+##### Local System
 
-In order to complete this you must:
+- `git clone https://github.com/SeanSnake93/ao-docker-tech-test`
+- `cd ao-docker-tech-test`
+- `git checkout containerize`
+- `sh A.sh`
+    - Enter AMI Access Key
+    - Enter AMI Secret Access Key
+>> * Gather 'apt' Updates
+>> * Build ssh key
+>> * Install Terraform
+>> * Build Terraform (Master)
+- `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
+> This will take you into the Manager Node.
+> The IP addrss is presented to you following the build of the Manager Terraform.
 
-- Provision an NGINX container that will route traffic to the application container.
-- Ensure the local developer experience is as seamless as possible, using docker compose.
+##### Manager Node
 
-### Part 2
+- `aws configure`
+    - Enter AMI Access Key
+    - Enter AMI Secret Access Key
+    - Enter AMI Region (eu-west-1)
+    - Enter AMI Formate (text)
 
-The application is currently built and packaged using an on-premise TeamCity installation and deployed to the virtual servers using Octopus Deploy. The team would like to modernise the deployment pipeline for the application now that it is running in a container. They have also expressed interest in having their infrastructure and pipeline defined as code to serve as a template to avoid repeat work when migrating similar applications.
+### Destroy
 
-The company is heavily invested in AWS and the team would like to stay with the companies cloud provider of choice. As this is an experiment so the team can learn more about running the app in the cloud they will only require a single environment to begin with.
+Please Note: The destroy file will fail either worker or manager depending on location. the worker is destroyed first within the network and is done so on the master node as it generates a unique key that it alone has access to.
 
-In order to complete this you must:
+##### Local System
 
-- Produce the Infrastructure as code for the build and deploy pipeline.
-- Produce the configuration file(s) for the build and deploy system.
-- Produce the Infrastructure as code for the Service that the application will be deploy to.
+- `cd ao-docker-tech-test`
+- `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
 
-Note that the infrastructure as code solution *does not* need to be run within a pipeline for this part of the experiment - The team are happy to run the terraform locally, for now.
+##### Manager Node
 
-### Part 3
+- `cd ao-docker-tech-test`
+- `sudo su`
+- `sh destroy.sh`
+>> * destroy Worker Nodes
+- `exit`
+- `exit`
 
-The team would like you to share your results with other teams who are also on a similar journey. Write a 'less than a page' summary on what you have produced for the team and any recommendations you would like to propose for future improvements.
+##### Local System
+
+- `sh destroy.sh`
+>> * destroy Manager Node and Network
