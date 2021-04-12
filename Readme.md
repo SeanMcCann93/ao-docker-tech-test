@@ -29,7 +29,11 @@ It was also nessasery to implement Nginx into the project. This has been achived
 
 ##### Improvments
 
-Ways this system could benerfit from additional features would be to convert the process into ansible scripts. This will enable more deliverate interactions with systems and prove oppertunities to configure tests that run to check changes made to the system. This would be great for agnoleging breaches and dta attempted to be reached.
+Ways this system could benefit from additional features would be to convert the process into ansible scripts and utilise the opportunity for a private subnet.
+
+This will enable more deliberate interactions with systems and prove opportunities to configure tests that run to check changes made to the system. This would be great for alleging breaches and data attempted to be reached.
+
+A Private cloud has been implemented in this network and a system could be set up to direct data through this to improve data security and include AWS tables.
 
 ## Pre-requisites
 
@@ -63,37 +67,37 @@ To run this build, you will require a [IAM User][aws-IAM].
 
 **This File will run the following commands:**
 
->> * ***Enter* AMI Access Key**
->> * ***Enter* AMI Secret Access Key**
+> * ***Enter* AMI Access Key**
+> * ***Enter* AMI Secret Access Key**
+> * Gather 'apt' Updates
+> * Build ssh key
+> * Install Terraform
+> * Build Terraform (Master) ~ *BUILDS*
 >> * Gather 'apt' Updates
->> * Build ssh key
->> * Install Terraform
->> * Build Terraform (Master) ~ *BUILDS*
+>> * Makes New Key
+>> * Installs AWS
+>> * Installs Terraform
+>> * Installs Docker
+>> * Installs Docker-Compose
+>> * Initalise Docker Swarm
+>> * Build Terraform (Worker) ~ *BUILDS*
 >>> * Gather 'apt' Updates
->>> * Makes New Key
->>> * Installs AWS
->>> * Installs Terraform
 >>> * Installs Docker
->>> * Installs Docker-Compose
->>> * Initalise Docker Swarm
->>> * Build Terraform (Worker) ~ *BUILDS*
->>>> * Gather 'apt' Updates
->>>> * Installs Docker
->>>> * Assigns server to Docker Swarm 'manager'
->>> * Builds Images with Docker-Compose
->>> * Deploys the Docker Swarm stack called 'AO_Stack'
+>>> * Assigns server to Docker Swarm 'manager'
+>> * Builds Images with Docker-Compose
+>> * Deploys the Docker Swarm stack called 'AO_Stack'
 
 ##### Manager Node
 
 Once Terraform has finished building, enter the 'manager' server to input your AWS credentials. This is so the manager server can build systems in Terraform.
 By using the following you will gain access to the 'manager' server and from there will enter your AWS credentials.
 
->> * `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
->>> * `aws configure`
->>>> * Enter AMI Access Key
->>>> * Enter AMI Secret Access Key
->>>> * Enter AMI Region (eu-west-1)
->>>> * Enter AMI Formate (text)
+> * `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
+>> * `aws configure`
+>>> * Enter AMI Access Key
+>>> * Enter AMI Secret Access Key
+>>> * Enter AMI Region (eu-west-1)
+>>> * Enter AMI Formate (text)
 
 *Please note: If `aws configure` dont work. It may not yet have been installed.*
 
