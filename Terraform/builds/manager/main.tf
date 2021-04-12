@@ -105,8 +105,9 @@ module "sg" {
     22 = "Open-SSH-Access"
     80 = "Open-HTTP-Access"
     3200 = "Open-Nginx-3200"
+    2377 = "Open-Swarm-Access"
     }
-  in_port        = [22, 80, 3200]
+  in_port        = [22, 80, 3200, 2377]
   in_cidr        = "0.0.0.0/0"
   out_port       = 0
   out_protocol   = "-1"
@@ -149,7 +150,7 @@ module "ec2_manager" {
   sh docker.sh
   sh docker-compose.sh
   cd ./..
-  docker swarm init
+  docker swarm init --advertise-addr $(hostname -i)
   cd Terraform/builds/worker/ && terraform init
   terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token=$(docker swarm join-token -q worker) -var IPLink=$(hostname -i) -auto-approve
   cd ./../../..
