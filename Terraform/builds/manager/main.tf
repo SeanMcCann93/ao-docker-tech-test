@@ -153,6 +153,7 @@ module "ec2_manager" {
   cd Terraform/builds/worker/ && terraform init
   terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token=$(docker swarm join-token -q worker) -var IPLink=$(hostname -i) -auto-approve
   cd ./../../..
+  docker-compose up --no-start
   docker stack deploy --compose-file docker-compose.yml AO_Stack
   EOF
 
