@@ -76,7 +76,7 @@ aws configure set default.output "text"
 
 echo ""
 
-cd Terraform/builds/manager && terraform init
+cd Terraform/builds/instance && terraform init
 
 echo ""
 echo "        :::::::::  :::    ::: ::::::::: :::       :::::::::"

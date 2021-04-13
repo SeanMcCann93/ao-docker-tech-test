@@ -1,7 +1,7 @@
 [windows-store]: https://www.microsoft.com/store/productId/9NBLGGH4MSV6
 [ubuntu-plug]: https://marketplace.visualstudio.com/items?itemName=Docter60.vscode-terminal-for-ubuntu
 [aws-IAM]: https://console.aws.amazon.com/iam/home
-[Overview-img]: https://github.com/SeanSnake93/ao-docker-tech-test/blob/containerize/docs/overview.png
+[Overview-img]: https://github.com/SeanSnake93/ao-docker-tech-test/blob/dockerComp/docs/overview.png
 
 # AO Tech Challenge
 
@@ -19,23 +19,19 @@ Solutions to each exercise will be evaluated on the following criteria:
 
 ![Network Overview][Overview-img]
 
-This Containerization enables a user to deploy a Docker Swarm Stack.
+This dockerComp enables a user to deploy a Docker Compose Stack on a local machine.
 
-This is achived by building a small network that consists of a manager(master) and worker(slave) node. It works by building andprevisioning the manager node and with this new system, configuring and building its workers.
+This is achived by building a single instance within a cloud network. It works by building a PC and previsioning an instance within a public subnet. The system when launched is configured using install scripts that are run upon downloading the application and changing to this branch.
 
-This is greate as although the containers can now be built, they also have the added benerfit of redundency.
-
-It was also nessasery to implement Nginx into the project. This has been achived using port `3200`. I used this port as port 80 was already exposed by the main continer and did not wish to undo work already produced.
+It was required that Nginx was implemented so that the application could take advantage of the capabilities of the software (loadbalancing, proxy etc;). As to implement it without undoing work already presented I utilised port `3200`. This port has been oped in the security group and will port forward from this location to the standard http port `80`.
 
 ##### Improvments
 
-Ways this system could benefit from additional features would be to convert the process into ansible scripts and utilise the opportunity for a private subnet.
+With this server only existing on a single instance we have the opportunity to expand the resiliency of the application in many forms. We can utilise a Docker Hub account to expand the network without the need for git pull requests, using ansible to install software on remote servers for us for clear confirmation and deliberate changes.
 
-This will enable more deliberate interactions with systems and prove opportunities to configure tests that run to check changes made to the system. This would be great for alleging breaches and data attempted to be reached.
+It will enable opportunities to perform closed operations on the application without affecting a front end/the main deployment. This allowed for the application to be restructured to benefit from the opportunities Terraform and other application combined can present in an AWS cloud platform. Quick to deploy, reliable hardware produced through additions made to the terraform file. With this model, A private cloud has been established.
 
-A Private cloud has been implemented in this network and a system could be set up to direct data through this to improve data security and include AWS tables.
-
-Another great couple of upgrades could be to introduce a Jenkins server or AWS Pipeline system that will enable CI/CD functionality and a dedicated secrets engine that can encrypt and assist in managing passwords/keys to all resources within, or yet to be extended within the network.
+One reason for this is because Table instances require a VPC hosting 2 or more subnets, but it can host instances that are required both legally and morally with great care. This means encryption and storing away in locations that only those with access can see. It is this reason a private cloud can be useful. It may even be ideal to use instances that host keys to tools, operations, infrastructure through a key management system. Enabling users given specific credentials to access specific tagged locations only or rights to affect the inner workings of your entire application.
 
 ## Pre-requisites
 
@@ -58,70 +54,33 @@ To run this build, you will require a [IAM User][aws-IAM].
 > To produce this you will need to have access to the following Policies.
 > * AmazonsEC2FullAccess
 
-### Instructions
+### Instructions Deploy & Destroy
 
 ##### Local System
 
 - `git clone https://github.com/SeanSnake93/ao-docker-tech-test`
 - `cd ao-docker-tech-test`
-- `git checkout containerize`
+- `git checkout dockerComp`
+
+#### Deploy
+
 - `sh A.sh`
 
 **This File will run the following commands:**
 
-> * ***Enter* AMI Access Key**
-> * ***Enter* AMI Secret Access Key**
+> * **AMI Access Key** `Enter Here`
+> * **AMI Secret Access Key** `Enter Here`
 > * Gather 'apt' Updates
 > * Build ssh key
 > * Install Terraform
-> * Build Terraform (Master) ~ *BUILDS*
+> * Build Terraform (instance) ~ *BUILDS*
 >> * Gather 'apt' Updates
->> * Makes New Key
->> * Installs AWS
->> * Installs Terraform
 >> * Installs Docker
 >> * Installs Docker-Compose
->> * Initalise Docker Swarm
->> * Build Terraform (Worker) ~ *BUILDS*
->>> * Gather 'apt' Updates
->>> * Installs Docker
->>> * Assigns server to Docker Swarm 'manager'
->> * Builds Images with Docker-Compose
->> * Deploys the Docker Swarm stack called 'AO_Stack'
-
-##### Manager Node
-
-Once Terraform has finished building, enter the 'manager' server to input your AWS credentials. This is so the manager server can build systems in Terraform.
-By using the following you will gain access to the 'manager' server and from there will enter your AWS credentials.
-
-> * `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
->> * `aws configure`
->>> * Enter AMI Access Key
->>> * Enter AMI Secret Access Key
->>> * Enter AMI Region (eu-west-1)
->>> * Enter AMI Formate (text)
-
-*Please note: If `aws configure` dont work. It may not yet have been installed.*
+>> * Builds Images with Docker-Compose and launches application
 
 ### Destroy
 
-Please Note: The destroy file will fail either worker or manager depending on location. the worker is destroyed first within the network and is done so on the master node as it generates a unique key that it alone has access to.
-
-##### Local System
-
-- `cd ao-docker-tech-test`
-- `ssh -i "~/.ssh/AccessKey" ubuntu@ec2-${Manager-IP}.eu-west-1.compute.amazonaws.com`
-
-##### Manager Node
-
-- `cd ao-docker-tech-test`
-- `sudo su`
-- `sh destroy.sh`
->> * destroy Worker Nodes
-- `exit`
-- `exit`
-
-##### Local System
-
 - `sh destroy.sh`
 >> * destroy Manager Node and Network
+>> *May require you to re-`aws configure` your aws over long periods*

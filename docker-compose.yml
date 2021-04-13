@@ -11,7 +11,7 @@ services:
       source: ./nginx/nginx.conf
       target: /etc/nginx/nginx.conf
     deploy:
-      replicas: 2 # This will deploy 2 copies of my application, no downtime while it builds.
+      replicas: 1 # This will deploy 2 copies of my application, no downtime while it builds.
   ao-main:
     image: ao # CHANGE THIS for front end access.
     build: .
@@ -19,4 +19,4 @@ services:
     - target: 80
       published: 80
     deploy:
-      replicas: 2
+      replicas: 1

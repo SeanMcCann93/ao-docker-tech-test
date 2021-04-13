@@ -105,9 +105,8 @@ module "sg" {
     22 = "Open-SSH-Access"
     80 = "Open-HTTP-Access"
     3200 = "Open-Nginx-3200"
-    2377 = "Open-Swarm-Access"
     }
-  in_port        = [22, 80, 3200, 2377]
+  in_port        = [22, 80, 3200]
   in_cidr        = "0.0.0.0/0"
   out_port       = 0
   out_protocol   = "-1"
@@ -124,7 +123,7 @@ module "sg" {
 # @@@@@@@       Manager       @@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-module "ec2_manager" {
+module "ec2_machine" {
   source         = "./../../tools/EC2"
   instance_count = "1"
   ami_code       = "ami-08bac620dc84221eb" # Ubuntu 20.04
@@ -136,29 +135,20 @@ module "ec2_manager" {
   lock           = var.locked
   user_data      = <<-EOF
   #!/bin/bash
-  sudo su ubuntu
-  ssh-keygen -f /home/ubuntu/.ssh/ManagerAccessKey -N "" -C "ubuntu"
   apt update
   apt-get update -y
   cd /home/ubuntu/
-  apt install awscli -y
   git clone https://github.com/SeanSnake93/ao-docker-tech-test
   cd ./ao-docker-tech-test
-  git checkout containerize
+  git checkout dockerComp
   cd ./install
-  sh terra.sh
   sh docker.sh
   sh docker-compose.sh
   cd ./..
-  docker swarm init --advertise-addr $(hostname -i)
-  cd Terraform/builds/worker/ && terraform init
-  terraform apply -var locked="false" -var aws_location="eu-west-1" -var Token=$(docker swarm join-token -q worker) -var IPLink=$(hostname -i) -auto-approve
-  cd ./../../..
-  docker-compose up --no-start
-  docker stack deploy --compose-file docker-compose.yml AO_Stack
+  docker-compose up
   EOF
 
   # @@@ TAGS @@@
-  name_tag = "AO-Manager"
+  name_tag = "AO-Container-Instance"
   network_tag = "AO"
 }
