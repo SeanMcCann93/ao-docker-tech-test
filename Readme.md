@@ -51,8 +51,77 @@ Ubuntu can be installed via the [windows store][windows-store].
 
 To run this build, you will require a [IAM User][aws-IAM].
 
-> To produce this you will need to have access to the following Policy attached.
-`{<br />    "Version": "2012-10-17",<br />    "Statement": [<br />        {<br />            "Effect": "Allow",<br />            "Action": [<br />                "ec2:AuthorizeSecurityGroupIngress",<br />                "ec2:DeleteSubnet",<br />                "ec2:DescribeInstances",<br />                "ec2:DeleteTags",<br />                "ec2:DescribeInstanceAttribute",<br />                "ec2:CreateVpc",<br />                "ec2:AttachInternetGateway",<br />                "ec2:DescribeVpcAttribute",<br />                "ec2:DeleteRouteTable",<br />                "ec2:ModifySubnetAttribute",<br />                "ec2:AssociateRouteTable",<br />                "ec2:DescribeInternetGateways",<br />                "ec2:DescribeNetworkInterfaces",<br />                "ec2:DescribeAvailabilityZones",<br />                "ec2:CreateRoute",<br />                "ec2:CreateInternetGateway",<br />                "ec2:RevokeSecurityGroupEgress",<br />                "ec2:CreateSecurityGroup",<br />                "ec2:DescribeVolumes",<br />                "ec2:DescribeAccountAttributes",<br />                "ec2:ModifyVpcAttribute",<br />                "ec2:DeleteInternetGateway",<br />                "ec2:ModifyInstanceAttribute",<br />                "ec2:DescribeKeyPairs",<br />                "ec2:DescribeNetworkAcls",<br />                "ec2:DescribeRouteTables",<br />                "ec2:AuthorizeSecurityGroupEgress",<br />                "ec2:TerminateInstances",<br />                "ec2:DescribeVpcClassicLinkDnsSupport",<br />                "ec2:CreateTags",<br />                "ec2:CreateRouteTable",<br />                "ec2:RunInstances",<br />                "ec2:DetachInternetGateway",<br />                "ec2:DisassociateRouteTable",<br />                "ec2:DescribeInstanceCreditSpecifications",<br />                "ec2:DescribeSecurityGroups",<br />                "ec2:DescribeVpcClassicLink",<br />                "ec2:DescribeVpcs",<br />                "ec2:DeleteSecurityGroup",<br />                "ec2:DeleteVpc",<br />                "ec2:CreateSubnet",<br />                "ec2:DescribeSubnets",<br />                "ec2:DeleteKeyPair"<br />            ],<br />            "Resource": "*"<br />        },<br />        {<br />            "Effect": "Allow",<br />            "Action": "ec2:ImportKeyPair",<br />            "Resource": "arn:aws:ec2:*:*:key-pair/*"<br />        }<br />    ]<br />}`
+To produce this you will need to have access to the following Policy attached.
+
+>`{`
+
+>>`    "Version": "2012-10-17",`
+>>`    "Statement": [`
+
+>>>`        {`
+
+>>>>`            "Effect": "Allow",`
+>>>>`            "Action": [`
+
+>>>>>`                "ec2:AuthorizeSecurityGroupIngress",`
+>>>>>`                "ec2:DeleteSubnet",`
+>>>>>`                "ec2:DescribeInstances",`
+>>>>>`                "ec2:DeleteTags",`
+>>>>>`                "ec2:DescribeInstanceAttribute",`
+>>>>>`                "ec2:CreateVpc",`
+>>>>>`                "ec2:AttachInternetGateway",`
+>>>>>`                "ec2:DescribeVpcAttribute",`
+>>>>>`                "ec2:DeleteRouteTable",`
+>>>>>`                "ec2:ModifySubnetAttribute",`
+>>>>>`                "ec2:AssociateRouteTable",`
+>>>>>`                "ec2:DescribeInternetGateways",`
+>>>>>`                "ec2:DescribeNetworkInterfaces",`
+>>>>>`                "ec2:DescribeAvailabilityZones",`
+>>>>>`                "ec2:CreateRoute",`
+>>>>>`                "ec2:CreateInternetGateway",`
+>>>>>`                "ec2:RevokeSecurityGroupEgress",`
+>>>>>`                "ec2:CreateSecurityGroup",`
+>>>>>`                "ec2:DescribeVolumes",`
+>>>>>`                "ec2:DescribeAccountAttributes",`
+>>>>>`                "ec2:ModifyVpcAttribute",`
+>>>>>`                "ec2:DeleteInternetGateway",`
+>>>>>`                "ec2:ModifyInstanceAttribute",`
+>>>>>`                "ec2:DescribeKeyPairs",`
+>>>>>`                "ec2:DescribeNetworkAcls",`
+>>>>>`                "ec2:DescribeRouteTables",`
+>>>>>`                "ec2:AuthorizeSecurityGroupEgress",`
+>>>>>`                "ec2:TerminateInstances",`
+>>>>>`                "ec2:DescribeVpcClassicLinkDnsSupport",`
+>>>>>`                "ec2:CreateTags",`
+>>>>>`                "ec2:CreateRouteTable",`
+>>>>>`                "ec2:RunInstances",`
+>>>>>`                "ec2:DetachInternetGateway",`
+>>>>>`                "ec2:DisassociateRouteTable",`
+>>>>>`                "ec2:DescribeInstanceCreditSpecifications",`
+>>>>>`                "ec2:DescribeSecurityGroups",`
+>>>>>`                "ec2:DescribeVpcClassicLink",`
+>>>>>`                "ec2:DescribeVpcs",`
+>>>>>`                "ec2:DeleteSecurityGroup",`
+>>>>>`                "ec2:DeleteVpc",`
+>>>>>`                "ec2:CreateSubnet",`
+>>>>>`                "ec2:DescribeSubnets",`
+>>>>>`                "ec2:DeleteKeyPair"`
+
+>>>>`            ],`
+>>>>`            "Resource": "*"`
+
+>>>`        },`
+>>>`        {`
+
+>>>>`            "Effect": "Allow",`
+>>>>`            "Action": "ec2:ImportKeyPair",`
+>>>>`            "Resource": "arn:aws:ec2:*:*:key-pair/*"`
+
+>>>`        }`
+
+>>`    ]`
+
+>`}`
 
 ### Instructions Deploy & Destroy
 
