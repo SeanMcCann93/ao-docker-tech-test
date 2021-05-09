@@ -55,8 +55,79 @@ Ubuntu can be installed via the [windows store][windows-store].
 
 To run this build, you will require a [IAM User][aws-IAM].
 
-> To produce this you will need to have access to the following Policies.
-> * AmazonsEC2FullAccess
+To produce this project you will need to have the following policy attached.
+
+>`{`
+
+>>`"Version": "2012-10-17",` <br />
+`"Statement": [`
+
+>>>`{`
+
+>>>>`"Effect": "Allow",` <br />
+`"Action": [`
+
+>>>>>`"ec2:AuthorizeSecurityGroupIngress",` <br />
+`"ec2:DeleteSubnet",` <br />
+`"ec2:DescribeInstances",` <br />
+`"ec2:DeleteTags",` <br />
+`"ec2:DescribeInstanceAttribute",` <br />
+`"ec2:CreateVpc",` <br />
+`"ec2:AttachInternetGateway",` <br />
+`"ec2:DescribeVpcAttribute",` <br />
+`"ec2:DeleteRouteTable",` <br />
+`"ec2:ModifySubnetAttribute",` <br />
+`"ec2:AssociateRouteTable",` <br />
+`"ec2:DescribeInternetGateways",` <br />
+`"ec2:DescribeNetworkInterfaces",` <br />
+`"ec2:DescribeAvailabilityZones",` <br />
+`"ec2:CreateRoute",` <br />
+`"ec2:CreateInternetGateway",` <br />
+`"ec2:RevokeSecurityGroupEgress",` <br />
+`"ec2:CreateSecurityGroup",` <br />
+`"ec2:DescribeVolumes",` <br />
+`"ec2:DescribeAccountAttributes",` <br />
+`"ec2:ModifyVpcAttribute",` <br />
+`"ec2:DeleteInternetGateway",` <br />
+`"ec2:ModifyInstanceAttribute",` <br />
+`"ec2:DescribeKeyPairs",` <br />
+`"ec2:DescribeNetworkAcls",` <br />
+`"ec2:DescribeRouteTables",` <br />
+`"ec2:AuthorizeSecurityGroupEgress",` <br />
+`"ec2:TerminateInstances",` <br />
+`"ec2:DescribeVpcClassicLinkDnsSupport",` <br />
+`"ec2:CreateTags",` <br />
+`"ec2:CreateRouteTable",` <br />
+`"ec2:RunInstances",` <br />
+`"ec2:DetachInternetGateway",` <br />
+`"ec2:DisassociateRouteTable",` <br />
+`"ec2:DescribeInstanceCreditSpecifications",` <br />
+`"ec2:DescribeSecurityGroups",` <br />
+`"ec2:DescribeVpcClassicLink",` <br />
+`"ec2:DescribeVpcs",` <br />
+`"ec2:DeleteSecurityGroup",` <br />
+`"ec2:DeleteVpc",` <br />
+`"ec2:CreateSubnet",` <br />
+`"ec2:DescribeSubnets",` <br />
+`"ec2:DeleteKeyPair"`
+
+>>>>`],` <br />
+`"Resource": "*"`
+
+>>>`},` <br />
+`{`
+
+>>>>`"Effect": "Allow",` <br />
+`"Action": "ec2:ImportKeyPair",` <br />
+`"Resource": "arn:aws:ec2:*:*:key-pair/*"`
+
+>>>`}`
+
+>>`]`
+
+>`}`
+
+*Please Note: AWS Policies are written in JSON and must retain format/spacing standards.*
 
 ### Instructions
 
